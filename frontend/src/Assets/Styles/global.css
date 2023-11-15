@@ -1,0 +1,11 @@
+.overflow-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-auto::-webkit-scrollbar {
+    display: none;
+}
+
+.noselect {
+    user-select: none;
+}
