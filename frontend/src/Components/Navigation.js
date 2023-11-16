@@ -34,7 +34,6 @@ const Navigation = () => {
                         navigate("/dashboard")
                     })
                     .catch(err => {
-                        console.log(err)
                     })
             }
             catch (err) {

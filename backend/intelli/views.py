@@ -6,6 +6,7 @@ from .serializers import UserSerializer, TaskSerializer
 import json
 from datetime import datetime
 import pytz
+import django.utils.timezone
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def test(request):
@@ -36,7 +37,6 @@ def getTasks(request, user_id):
             res.append({"id": task.id, "task": task.title, "date": task.deadline, "completion": "Complete" if task.progress == 100 else "Incomplete", "priority": task.priority, "progress": task.progress})
         return JsonResponse(res, status=200, safe=False)
     except Exception as e:
-        print(e)
         return HttpResponse(status=500)
     
 @api_view(['GET'])
@@ -62,10 +62,8 @@ def updateTask(request, id):
             task.save()
             return HttpResponse(status=204)
         except Exception as e:
-            print(e)
             return HttpResponse(status=403)
     except Exception as e:
-        print(e)
         return HttpResponse(status=500)
     
 @api_view(['DELETE'])
@@ -86,7 +84,6 @@ def newTask(request):
     try:
         data = json.loads(request.body.decode('utf-8'))
         deadline = datetime.strptime(data['deadline'], "%Y-%m-%dT%H:%M:%S.%fZ")
-        deadline = deadline.replace(tzinfo=pytz.timezone('Asia/Kolkata'))
         obj = Task(user=User.objects.get(id=data['id']),
                    title=data['title'],
                    deadline=deadline,
@@ -95,5 +92,4 @@ def newTask(request):
         obj.save()
         return HttpResponse(status=200)
     except Exception as e:
-        print(e)
         return HttpResponse(status=500)

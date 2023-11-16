@@ -46,12 +46,10 @@ const AddTask = () => {
                     navigate({pathname: "/dashboard"})
                 }
                 else {
-                    console.log(response.status)
                     setIsSaving(false)
                 }
             })
             .catch(e => {
-                console.log("NO")
                 setIsSaving(false)
             })
         }
@@ -63,18 +61,18 @@ const AddTask = () => {
             <div className='h-full flex items-center justify-center' style={{width: "calc(100% - 208px)"}}>
                 <div className='h-4/6 w-9/12 rounded-2xl bg-slate-900 flex flex-col shadow-lg shadow-slate-900 p-10 gap-8'>
                     <div className='w-full flex justify-start items-center' style={{height: "30px"}}>
-                        <input className='text-slate-300 font-semibold text-2xl bg-transparent py-2 px-5 focus:outline-none focus:border-b' placeholder='Title...' value={title} onChange={e => {setTitle(e.target.value)}}/>
+                        <input className='text-slate-300 font-semibold text-3xl bg-transparent py-2 px-5 focus:outline-none focus:border-b' placeholder='Title...' value={title} onChange={e => {setTitle(e.target.value)}}/>
                     </div>
                     <div className='w-full flex gap-10'>
                         <div className='w-5/12 flex flex-col gap-8'>
                             <div className='w-9/12 h-40 rounded-3xl px-6 py-6 bg-slate-700 flex flex-col items-start justify-center gap-4'>
                                 <div className='flex items-start gap-4 justify-center'>
                                     <CalendarDays size={32} />
-                                    <label className='h-8 text-lg font-semibold'>{!deadline?"Not Set...":deadline.getDate() + ' ' + months[deadline.getMonth()] + ', ' + deadline.getFullYear()}</label>
+                                    <label className='h-8 text-lg font-semibold'>{!deadline?".....":deadline.getDate() + ' ' + months[deadline.getMonth()] + ', ' + deadline.getFullYear()}</label>
                                 </div>
                                 <div className='flex items-start gap-4 justify-center'>
                                     <Clock size={32} />
-                                    <label className='h-8 text-lg font-semibold'>{!deadline?"Not Set...":deadline.getHours().toString().padStart(2, '0') + ' : ' + deadline.getMinutes().toString().padStart(2, '0') + ' : ' + deadline.getSeconds().toString().padStart(2, '0')}</label>
+                                    <label className='h-8 text-lg font-semibold'>{!deadline?".....":deadline.getHours().toString().padStart(2, '0') + ' : ' + deadline.getMinutes().toString().padStart(2, '0') + ' : ' + deadline.getSeconds().toString().padStart(2, '0')}</label>
                                 </div>
                                 <div className='w-full flex items-center justify-center'><input type='datetime-local' onChange={e => setDeadline(new Date(e.target.value))} className='w-5 bg-transparent focus:outline-none'></input></div>
                             </div>

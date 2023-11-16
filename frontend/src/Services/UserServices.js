@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const BACKEND_BASE_URL_2 = "https://pranav1483-intellitask.hf.space/api/"
-export const BACKEND_BASE_URL_3 = 'http://localhost:8000/api/'
+export const BACKEND_BASE_URL_1 = 'http://localhost:8000/api/'
 export const BACKEND_BASE_URL = 'https://intelli-task.onrender.com/api/'
 class UserService {
     getUser(user) {

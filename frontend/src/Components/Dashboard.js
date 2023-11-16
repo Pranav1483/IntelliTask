@@ -10,7 +10,6 @@ import { Rings } from 'react-loader-spinner'
 
 const Dashboard = () => {
     const auth = (!!Cookies.get('taskAuth'))?JSON.parse(Cookies.get('taskAuth')):null
-    console.log(auth)
     const [filter, setFilter] = useState('all')
     const [query, setQuery] = useState('')
     const [visibleArr, setVisibleArr] = useState([])
@@ -21,6 +20,7 @@ const Dashboard = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     useEffect(() => {
+
         userService.getTasks(auth.id)
         .then(response => {
             if (response.status === 200) {
@@ -67,7 +67,6 @@ const Dashboard = () => {
             temp.sort((a, b) => a.date - b.date)
         }
         setVisibleArr(temp)
-        console.log(temp)
     }, [arr, filter, query, dateOrder])
 
     const setOrder = () => {
@@ -125,10 +124,10 @@ const Dashboard = () => {
                                 <div className='text-slate-300 font-semibold text-center w-2/12 h-full flex items-center justify-center'>{months[item.date.getMonth()] + ' ' + item.date.getDate() + ', ' + item.date.getFullYear()}</div>
                                 <div className='text-slate-300 font-semibold text-center w-1/12 h-full flex items-center justify-center'>{item.date.getHours().toString().padStart(2, '0') + ':' + item.date.getMinutes().toString().padStart(2, '0')}</div>
                                 <div className='text-slate-300 font-semibold text-center w-3/12 h-full flex items-center justify-center gap-2'>
-                                    {(item.priority === true) && <Star size={16} strokeWidth={4}/>}
-                                    {(item.priority === false) && <div/>}
-                                    <CircularProgressbar className='h-5/6' value={item.progress + 1} strokeWidth={15} styles={buildStyles({pathColor: "#00a8e8", textColor: "white", textSize: "16px", trailColor: "#475569", strokeLinecap: "round"})}/>
-                                    <label className='font-semibold text-slate-300 text-xs'>{item.progress}%</label>
+                                    {(item.priority === true) && <div className='h-full w-1/12 flex items-center justify-center'><Star size={16} strokeWidth={4}/></div>}
+                                    {(item.priority === false) && <div className='h-full w-1/12 flex items-center justify-center'><Star size={16} strokeWidth={4} color='rgb(15,23,42)'/></div>}
+                                    <div className='w-2/12 h-full flex items-center justify-center'><CircularProgressbar className='h-5/6' value={item.progress + 1} strokeWidth={15} styles={buildStyles({pathColor: "#00a8e8", textColor: "white", textSize: "16px", trailColor: "#475569", strokeLinecap: "round"})}/></div>
+                                    <div className='h-full w-1/12 flex items-center justify-center'><label className='font-semibold text-slate-300 text-xs'>{item.progress}%</label></div>
                                 </div>
                                 <div className='flex items-center justify-center w-2/12 h-full'>
                                     <div className='h-4/6 w-7/12 rounded-2xl flex items-center justify-center text-white hover:cursor-pointer' style={{backgroundColor: (item.completion === "Complete")?"green":(item.date < Date.now())?"#ab273c":"#777e7a"}} onClick={() => {navigate("task/" + item.id.toString())}}>{(item.completion === "Complete")?"Complete":(item.date < Date.now())?"Incomplete":"In Progress"}</div>
