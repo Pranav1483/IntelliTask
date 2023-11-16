@@ -21,10 +21,6 @@ const Dashboard = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     useEffect(() => {
-        if (!auth) {
-            navigate({pathname: "/"})
-            return
-        }
         userService.getTasks(auth.id)
         .then(response => {
             if (response.status === 200) {
@@ -40,9 +36,9 @@ const Dashboard = () => {
             setIsLoading(false)
         })
         .catch(e => {
-            navigate({pathname: "/"})
+            
         })
-    }, [auth.id, auth, navigate])
+    }, [auth.id])
 
     useEffect(() => {
         var temp = []
@@ -130,8 +126,8 @@ const Dashboard = () => {
                                 <div className='text-slate-300 font-semibold text-center w-1/12 h-full flex items-center justify-center'>{item.date.getHours().toString().padStart(2, '0') + ':' + item.date.getMinutes().toString().padStart(2, '0')}</div>
                                 <div className='text-slate-300 font-semibold text-center w-3/12 h-full flex items-center justify-center gap-2'>
                                     {(item.priority === true) && <Star size={16} strokeWidth={4}/>}
-                                    {(item.priority === false) && <Star size={16} strokeWidth={4} color='rgb(15,23,42)'/>}
-                                    <CircularProgressbar className='h-5/6' value={item.progress} strokeWidth={15} styles={buildStyles({pathColor: "#00a8e8", textColor: "white", textSize: "16px", trailColor: "#475569", strokeLinecap: "round"})}/>
+                                    {(item.priority === false) && <div/>}
+                                    <CircularProgressbar className='h-5/6' value={item.progress + 1} strokeWidth={15} styles={buildStyles({pathColor: "#00a8e8", textColor: "white", textSize: "16px", trailColor: "#475569", strokeLinecap: "round"})}/>
                                     <label className='font-semibold text-slate-300 text-xs'>{item.progress}%</label>
                                 </div>
                                 <div className='flex items-center justify-center w-2/12 h-full'>
