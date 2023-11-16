@@ -16,8 +16,9 @@ const Sidepanel = (prop) => {
     }
 
     useEffect(() => {
+        console.log(auth)
         if (!auth) {
-            navigate('/')
+            navigate({pathname: '/'})
         }
     }, [auth, navigate])
     return (

@@ -5,6 +5,7 @@ import { CalendarDays, Check, Clock, Star, X } from 'lucide-react'
 import '../Assets/Styles/global.css'
 import userService from '../Services/UserServices'
 import { useNavigate } from 'react-router-dom'
+import { ProgressBar } from 'react-loader-spinner'
 
 const AddTask = () => {
     const auth = (!!Cookies.get('taskAuth'))?JSON.parse(Cookies.get('taskAuth')):null
@@ -14,6 +15,7 @@ const AddTask = () => {
     const [priority, setPriority] = useState(false)
     const [subtasks, setSubtasks] = useState([])
     const [currSubtask, setCurrSubtask] = useState('')
+    const [isSaving, setIsSaving] = useState(false)
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     const addSubTask = () => {
@@ -37,6 +39,7 @@ const AddTask = () => {
     const TaskButton = (e) => {
         e.preventDefault()
         if ((title !== '') && (!!deadline) && (subtasks.length !== 0)) {
+            setIsSaving(true)
             userService.newTask(auth.id, title, deadline, subtasks, priority)
             .then(response => {
                 if (response.status === 200){
@@ -44,10 +47,12 @@ const AddTask = () => {
                 }
                 else {
                     console.log(response.status)
+                    setIsSaving(false)
                 }
             })
             .catch(e => {
                 console.log("NO")
+                setIsSaving(false)
             })
         }
     }
@@ -84,7 +89,8 @@ const AddTask = () => {
                                     <div className='flex w-full'><input className='w-11/12 text-slate-300 font-semibold bg-transparent py-2 px-5 focus:outline-none focus:border-b' placeholder='SubTask...' value={currSubtask} onChange={e => setCurrSubtask(e.target.value)} onKeyDown={onPressEnter}/><Check className='hover:text-white hover:cursor-pointer' onClick={addSubTask}/></div>
                                 </div>
                                 <div className='w-full flex items-center justify-center'>
-                                    <button className='bg-slate-500 py-2 px-4 rounded-full font-semibold' onClick={TaskButton}>Add Task</button>
+                                    {!isSaving && <button className='bg-slate-500 py-2 px-4 rounded-full font-semibold' onClick={TaskButton}>Add Task</button>}
+                                    {isSaving && <div><ProgressBar height="60px" width="100px" ariaLabel='progress-bar-loading' wrapperClass='progress-bar-wrapper' borderColor='rgb(15,23,42)' barColor = '#51E5FF'></ProgressBar></div>}
                                 </div>
                             </div>
                         </div>

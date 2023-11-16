@@ -6,6 +6,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import Cookies from 'js-cookie'
 import userService from '../Services/UserServices'
 import { useNavigate } from 'react-router-dom'
+import { Rings } from 'react-loader-spinner'
 
 const Dashboard = () => {
     const auth = (!!Cookies.get('taskAuth'))?JSON.parse(Cookies.get('taskAuth')):null
@@ -15,10 +16,15 @@ const Dashboard = () => {
     const [visibleArr, setVisibleArr] = useState([])
     const [arr, setArr] = useState([])
     const [dateOrder, setDateOrder] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     useEffect(() => {
+        if (!auth) {
+            navigate({pathname: "/"})
+            return
+        }
         userService.getTasks(auth.id)
         .then(response => {
             if (response.status === 200) {
@@ -31,11 +37,12 @@ const Dashboard = () => {
                 date: new Date(item.date),
             }))
             setArr(temp)
+            setIsLoading(false)
         })
         .catch(e => {
-            
+            navigate({pathname: "/"})
         })
-    }, [auth.id])
+    }, [auth.id, auth, navigate])
 
     useEffect(() => {
         var temp = []
@@ -115,7 +122,7 @@ const Dashboard = () => {
                         <label className='text-slate-300 font-semibold text-center w-3/12'>Status</label>
                         <label className='text-slate-300 font-semibold text-center w-2/12'>Completion</label>
                     </div>
-                    <div className='tasktable h-3/4 w-11/12 flex flex-col overflow-auto'>
+                    {!isLoading && <div className='tasktable h-3/4 w-11/12 flex flex-col overflow-auto'>
                         {visibleArr.map((item, idx) => (
                             <div key={idx} className='w-full mt-5 rounded-2xl h-14 bg-slate-900 flex items-center' style={{minHeight: "56px"}}>
                                 <div className='taskcell text-slate-300 font-semibold text-left ml-6 w-4/12 overflow-auto h-full items-center flex' style={{whiteSpace: "nowrap"}}>{item.task}</div>
@@ -123,7 +130,7 @@ const Dashboard = () => {
                                 <div className='text-slate-300 font-semibold text-center w-1/12 h-full flex items-center justify-center'>{item.date.getHours().toString().padStart(2, '0') + ':' + item.date.getMinutes().toString().padStart(2, '0')}</div>
                                 <div className='text-slate-300 font-semibold text-center w-3/12 h-full flex items-center justify-center gap-2'>
                                     {(item.priority === true) && <Star size={16} strokeWidth={4}/>}
-                                    {(item.priority === false) && <div style={{width: "23px"}}></div>}
+                                    {(item.priority === false) && <Star size={16} strokeWidth={4} color='rgb(15,23,42)'/>}
                                     <CircularProgressbar className='h-5/6' value={item.progress} strokeWidth={15} styles={buildStyles({pathColor: "#00a8e8", textColor: "white", textSize: "16px", trailColor: "#475569", strokeLinecap: "round"})}/>
                                     <label className='font-semibold text-slate-300 text-xs'>{item.progress}%</label>
                                 </div>
@@ -132,7 +139,8 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div>}
+                    {isLoading && <Rings ariaLabel="rings-loading" visible={true} wrapperClass="" wrapperStyle={{}} radius="6" height="80" width="80"color="#51E5FF"></Rings>}
                 </div>
             </div>
         </div>
