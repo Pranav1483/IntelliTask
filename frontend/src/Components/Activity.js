@@ -41,7 +41,9 @@ const Activity = () => {
 
     useEffect(() => {
         let start = new Date()
+        start.setHours(0, 0, 0, 0)
         let end = new Date()
+        end.setHours(23, 59, 59, 9)
         if (graphRange === 'weekly') {
             start.setDate(new Date().getDate() + offset*7 - 3)
             end.setDate(new Date().getDate() + offset*7 + 3)
@@ -88,16 +90,17 @@ const Activity = () => {
         <div className='w-auto h-screen bg-slate-800 flex blue'>
             <Sidepanel auth={auth} page='activity'/>
             <div className='h-full flex flex-col items-center justify-center' style={{width: "calc(100% - 208px)"}}>
-                <div className='h-2/6 w-full flex justify-center items-center gap-10 mt-6'>
+                <div className='h-2/6 w-full flex justify-center items-center gap-10 mt-4'>
                     <div className='flex flex-col justify-center items-start rounded-3xl bg-slate-700 px-12 py-8'>
                         <label className='font-bold text-3xl text-slate-500 mb-4'>Total Tasks : {arr.length}</label>
                         <label className='font-semibold text-lg'>Completed : {pieData[0]["value"]}</label>
                         <label className='font-semibold text-lg'>Pending : {pieData[1]["value"]}</label>
                         <label className='font-semibold text-lg'>Incomplete : {pieData[2]["value"]}</label>
                     </div>
-                    <div className='h-full w-3/6 flex items-center justify-center p-2 rounded-3xl bg-slate-700'>
-                        <PieChart width={370} height={250}>
-                            <Pie className='font-bold text-lg' data={pieData} dataKey="value" nameKey="name" fill='#fff' label={function(entry) {return entry.name}} stroke='none'>
+                    <div className='h-full w-3/6 flex items-center justify-center rounded-3xl bg-slate-700'>
+                        <PieChart width={500} height={300}>
+                            <Legend layout='vertical' verticalAlign='middle' align='right' wrapperStyle={{fontWeight: "700"}}/>
+                            <Pie className='font-bold text-lg' data={pieData} dataKey="value" nameKey="name" fill='#fff' stroke='none'>
                                 {pieData.map((entry, index) => <Cell key={index} className='hover:opacity-80' fill={COLORS[index]}></Cell>)}
                             </Pie>
                         </PieChart>
