@@ -59,6 +59,7 @@ def updateTask(request, id):
         try:
             task.subtasks = updated_subtasks
             task.progress = updated_progress
+            task.save()
             return HttpResponse(status=204)
         except Exception as e:
             return HttpResponse(status=403)
