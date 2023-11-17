@@ -9,3 +9,15 @@
 .noselect {
     user-select: none;
 }
+
+input[type="datetime-local"]::-webkit-datetime-edit {
+    display: none;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

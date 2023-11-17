@@ -20,7 +20,6 @@ const Dashboard = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     useEffect(() => {
-
         userService.getTasks(auth.id)
         .then(response => {
             if (response.status === 200) {
@@ -75,7 +74,7 @@ const Dashboard = () => {
 
     return (
         <div className='w-auto h-screen bg-slate-800 flex'>
-            <Sidepanel auth={auth}/>
+            <Sidepanel auth={auth} page='dashboard'/>
             <div className='h-full' style={{width: "calc(100% - 208px)"}}>
                 <div className='h-14 w-full flex items-center'>
                     <div className='h-full w-3/5 flex items-center justify-start pl-10 gap-20'>

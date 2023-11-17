@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Sidepanel = (prop) => {
     const [auth, setAuth] = useState(prop['auth'])
+    const page = prop['page']
     const navigate = useNavigate()
 
     const Logout = (e) => {
@@ -29,19 +30,19 @@ const Sidepanel = (prop) => {
                     </div>
                 </div>
                 <div className='h-4/6 w-full flex flex-col justify-center items-center gap-10'>
-                    <div className='h-14 w-44 rounded-xl bg-slate-900 px-3 py-1 flex flex-row items-center justify-start gap-2 shadow-sm shadow-black hover:cursor-pointer' onClick={() => {navigate("/dashboard")}}>
+                    <div className={`h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer ${(page === 'dashboard')?"bg-slate-900 shadow-sm shadow-black":""}`} onClick={() => {navigate({pathname: "/dashboard"})}}>
                         <div className='h-10 w-10 flex justify-center items-center hover:cursor-pointer'>
                             <ListChecks color='white'/>
                         </div>
                         <label className='text-slate-300 font-semibold hover:cursor-pointer'>Dashboard</label>
                     </div>
-                    <div className='h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer'>
+                    <div className={`h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer ${(page === 'activity')?"bg-slate-900 shadow-sm shadow-black":""}`} onClick={() => {navigate({pathname: "/activity"})}}>
                         <div className='h-10 w-10 flex justify-center items-center hover:cursor-pointer'>
                             <LineChart color='white'/>
                         </div>
                         <label className='text-slate-300 font-semibold hover:cursor-pointer'>Activity</label>
                     </div>
-                    <div className='h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer'>
+                    <div className={`h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer ${(page === 'reports')?"bg-slate-900 shadow-sm shadow-black":""}`}>
                         <div className='h-10 w-10 flex justify-center items-center hover:cursor-pointer'>
                             <BookOpenText color='white'/>
                         </div>

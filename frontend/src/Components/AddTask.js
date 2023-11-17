@@ -57,7 +57,7 @@ const AddTask = () => {
     
     return (
         <div className='w-auto h-screen bg-slate-800 flex'>
-            <Sidepanel auth={auth}/>
+            <Sidepanel auth={auth} page='dashboard'/>
             <div className='h-full flex items-center justify-center' style={{width: "calc(100% - 208px)"}}>
                 <div className='h-4/6 w-9/12 rounded-2xl bg-slate-900 flex flex-col shadow-lg shadow-slate-900 p-10 gap-8'>
                     <div className='w-full flex justify-start items-center' style={{height: "30px"}}>
@@ -74,9 +74,9 @@ const AddTask = () => {
                                     <Clock size={32} />
                                     <label className='h-8 text-lg font-semibold'>{!deadline?".....":deadline.getHours().toString().padStart(2, '0') + ' : ' + deadline.getMinutes().toString().padStart(2, '0') + ' : ' + deadline.getSeconds().toString().padStart(2, '0')}</label>
                                 </div>
-                                <div className='w-full flex items-center justify-center'><input type='datetime-local' onChange={e => setDeadline(new Date(e.target.value))} className='w-5 bg-transparent focus:outline-none'></input></div>
+                                <div className='w-full flex items-center justify-center'><input type='datetime-local' onChange={e => setDeadline(new Date(e.target.value))} className='focus:outline-none bg-transparent text-2xl'></input></div>
                             </div>
-                            <div className='flex items-center justify-center w-8/12 mt-5'>
+                            <div className='flex items-center justify-center w-8/12 mt-3'>
                                 <Star strokeWidth={3.5} size={90} color={priority === true?"rgb(0, 168, 232)":"white"} onClick={() => {setPriority(!priority)}}/>
                             </div>
                         </div>

@@ -80,7 +80,7 @@ const TaskDetails = () => {
 
     return (
         <div className='w-auto h-screen bg-slate-800 flex'>
-            <Sidepanel auth={auth}/>
+            <Sidepanel auth={auth} page='dashboard'/>
             <div className='h-full flex items-center justify-center' style={{width: "calc(100% - 208px)"}}>
                 {task && <div className='h-4/6 w-9/12 rounded-2xl bg-slate-900 flex flex-col shadow-lg shadow-slate-900 p-10 gap-8'>
                     <div className='w-full flex justify-start items-center' style={{height: "30px"}}>
