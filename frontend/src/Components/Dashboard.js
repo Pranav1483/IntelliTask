@@ -116,7 +116,7 @@ const Dashboard = () => {
                         <label className='text-slate-300 font-semibold text-center w-3/12'>Status</label>
                         <label className='text-slate-300 font-semibold text-center w-2/12'>Completion</label>
                     </div>
-                    {!isLoading && <div className='tasktable h-3/4 w-11/12 flex flex-col overflow-auto'>
+                    {!isLoading && <div className='h-3/4 w-11/12 flex flex-col overflow-auto'>
                         {visibleArr.map((item, idx) => (
                             <div key={idx} className='w-full mt-5 rounded-2xl h-14 bg-slate-900 flex items-center' style={{minHeight: "56px"}}>
                                 <div className='taskcell text-slate-300 font-semibold text-left ml-6 w-4/12 overflow-auto h-full items-center flex' style={{whiteSpace: "nowrap"}}>{item.task}</div>

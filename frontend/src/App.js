@@ -4,6 +4,7 @@ import Dashboard from "./Components/Dashboard";
 import TaskDetails from "./Components/TaskDetails";
 import AddTask from "./Components/AddTask";
 import Activity from "./Components/Activity";
+import Reports from "./Components/Reports";
 
 function App () {
     return (
@@ -15,6 +16,7 @@ function App () {
                 <Route path="/dashboard/task/:id" element={<TaskDetails/>}/>
                 <Route path="/dashboard/task" element={<AddTask/>}/>
                 <Route path="/activity" element={<Activity/>}/>
+                <Route path="/reports" element={<Reports/>}/>
             </Routes>
         </BrowserRouter>
     );

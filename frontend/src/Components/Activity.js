@@ -100,7 +100,7 @@ const Activity = () => {
                     <div className='h-full w-3/6 flex items-center justify-center rounded-3xl bg-slate-700'>
                         <PieChart width={500} height={300}>
                             <Legend layout='vertical' verticalAlign='middle' align='right' wrapperStyle={{fontWeight: "700"}}/>
-                            <Pie className='font-bold text-lg' data={pieData} dataKey="value" nameKey="name" fill='#fff' stroke='none'>
+                            <Pie isAnimationActive={true} className='font-bold text-lg' data={pieData} dataKey="value" nameKey="name" fill='#fff' stroke='none'>
                                 {pieData.map((entry, index) => <Cell key={index} className='hover:opacity-80' fill={COLORS[index]}></Cell>)}
                             </Pie>
                         </PieChart>

@@ -48,7 +48,8 @@ const Navigation = () => {
             </div>
             <div className='h-full w-1/2 flex items-center justify-end pr-10 gap-10'>
                 <a href='/dashboard' className='text-white font-semibold hover:underline'>Dashboard</a>
-                <a href='/' className='text-white font-semibold'>Reports</a>
+                <a href='/activity' className='text-white font-semibold hover:underline'>Activity</a>
+                <a href='/reports' className='text-white font-semibold hover:underline'>Reports</a>
                 {!auth && <button className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150" onClick={Login}>
                     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
                     <span>Login with Google</span>

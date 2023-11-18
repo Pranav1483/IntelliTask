@@ -42,7 +42,7 @@ const Sidepanel = (prop) => {
                         </div>
                         <label className='text-slate-300 font-semibold hover:cursor-pointer'>Activity</label>
                     </div>
-                    <div className={`h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer ${(page === 'reports')?"bg-slate-900 shadow-sm shadow-black":""}`}>
+                    <div className={`h-14 w-44 rounded-xl px-3 py-1 flex flex-row items-center justify-start gap-2 hover:bg-slate-900 hover:shadow-sm hover:shadow-black hover:cursor-pointer ${(page === 'reports')?"bg-slate-900 shadow-sm shadow-black":""}`}  onClick={() => {navigate({pathname: "/reports"})}}>
                         <div className='h-10 w-10 flex justify-center items-center hover:cursor-pointer'>
                             <BookOpenText color='white'/>
                         </div>
