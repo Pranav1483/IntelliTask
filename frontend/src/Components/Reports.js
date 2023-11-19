@@ -26,7 +26,7 @@ const Reports = () => {
         .then(data => {
             const temp = data.map(item => ({
                 ...item,
-                date: `Date: ${new Date(item.date).getDate()}/${new Date(item.date).getMonth()}/${new Date(item.date).getFullYear()} Time: ${new Date(item.date).getHours}:${new Date(item.date).getMinutes}`,
+                date: `Date: ${new Date(item.date).getDate()}/${new Date(item.date).getMonth()+1}/${new Date(item.date).getFullYear()} Time: ${new Date(item.date).getHours}:${new Date(item.date).getMinutes}`,
             }))
             setUserTasks(JSON.stringify(temp))
         })
@@ -79,7 +79,7 @@ const Reports = () => {
                 messages: [
                     {
                     "role": "user",
-                    "content" : `<CONTEXT>Given is a list of user tasks with the following parameters - task: task name, date: deadline datetime object, completion: completion status, priority: Important or not, progress: completion %\n${userTasks}\nAnswer the query from this data. Answer shortly and upto the point only. Current Date: ${new Date().getDate()}/${new Date().getMonth()}/${new Date().getYear()} Current Time: ${new Date().getHours()}:${new Date().getMinutes()}. Answer the queries considering current date and the date of each task</CONTEXT>Query: ${query}`
+                    "content" : `<CONTEXT>Given is a list of user tasks with the following parameters - task: task name, date: deadline datetime object, completion: completion status, priority: Important or not, progress: completion %\n${userTasks}\nAnswer the query from this data. Answer shortly and upto the point only. Current Date: ${new Date().getDate()}/${new Date().getMonth()+1}/${new Date().getYear()} Current Time: ${new Date().getHours()}:${new Date().getMinutes()}. Answer the queries considering current date and the date of each task</CONTEXT>Query: ${query}`
                     }
                 ],
                 stream: true,
