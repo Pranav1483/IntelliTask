@@ -1,8 +1,10 @@
 import { googleLogout } from '@react-oauth/google'
+import axios from 'axios'
 import Cookies from 'js-cookie'
 import { BookOpenText, LineChart, ListChecks, LogOut } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { BACKEND_BASE_URL } from '../Services/UserServices'
 
 const Sidepanel = (prop) => {
     const [auth, setAuth] = useState(prop['auth'])
@@ -15,6 +17,15 @@ const Sidepanel = (prop) => {
         Cookies.remove('taskAuth')
         setAuth(null)
     }
+
+    useEffect(() => {
+        if (auth) {
+            const interval = setInterval(() => {
+                axios.get(BACKEND_BASE_URL).then(response => {console.log("YES")}).catch(e => {})
+            }, 5*60*1000)
+            return () => clearInterval(interval)
+        }
+    }, [auth])
 
     useEffect(() => {
         if (!auth) {
