@@ -1,4 +1,4 @@
-import { googleLogout } from '@react-oauth/google'
+import { googleLogout } from '@react-oauth/google';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { BookOpenText, LineChart, ListChecks, LogOut } from 'lucide-react'
