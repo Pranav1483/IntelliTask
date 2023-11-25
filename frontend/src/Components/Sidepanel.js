@@ -21,7 +21,7 @@ const Sidepanel = (prop) => {
     useEffect(() => {
         if (auth) {
             const interval = setInterval(() => {
-                axios.get(BACKEND_BASE_URL).then(response => {console.log("YES")}).catch(e => {})
+                axios.get(BACKEND_BASE_URL).catch(e => {})
             }, 5*60*1000)
             return () => clearInterval(interval)
         }
