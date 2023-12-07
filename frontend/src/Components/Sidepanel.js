@@ -22,7 +22,7 @@ const Sidepanel = (prop) => {
         if (auth) {
             const interval = setInterval(() => {
                 axios.get(BACKEND_BASE_URL).catch(e => {})
-            }, 5*60*1000)
+            }, 14*60*1000)
             return () => clearInterval(interval)
         }
     }, [auth])
