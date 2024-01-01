@@ -17,6 +17,7 @@ const Navigation = () => {
                         Authorization: `Bearer ${response.access_token}`,
                     },
                 })
+                console.log(res)
                 const name = res.data.name.split(" ")
                 const userData = {email: res.data.email,
                                     firstName: name[0],
