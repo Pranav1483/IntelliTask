@@ -12,6 +12,7 @@ const Navigation = () => {
     const Login = useGoogleLogin({
         onSuccess: async (response) => {
             try {
+                console.log(response.access_token)
                 const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
                     headers: {
                         Authorization: `Bearer ${response.access_token}`,
