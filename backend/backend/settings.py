@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOWED_ORIGINS = ['https://intellitask.vercel.app']
+
 INSTALLED_APPS = [
     'intelli',
     'rest_framework',
