@@ -29,7 +29,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://intellitask.vercel.app/', 'https://intelli-task-backend.vercel.app']
+ALLOWED_HOSTS = ['intellitask.vercel.app', 'intelli-task-backend.vercel.app']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
