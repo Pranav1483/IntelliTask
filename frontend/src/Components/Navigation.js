@@ -12,13 +12,11 @@ const Navigation = () => {
     const Login = useGoogleLogin({
         onSuccess: async (response) => {
             try {
-                console.log(response.access_token)
                 const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
                     headers: {
                         Authorization: `Bearer ${response.access_token}`,
                     },
                 })
-                console.log(res)
                 const name = res.data.name.split(" ")
                 const userData = {email: res.data.email,
                                     firstName: name[0],

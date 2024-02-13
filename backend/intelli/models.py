@@ -10,7 +10,7 @@ class Task(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False)
     title = models.CharField(max_length=256, null=False)
     created = models.DateTimeField(auto_now_add=True)
-    deadline = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField()
     progress = models.IntegerField(default=0)
     subtasks = models.JSONField(null=False)
     priority = models.BooleanField(default=False)

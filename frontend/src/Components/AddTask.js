@@ -17,6 +17,7 @@ const AddTask = () => {
     const [currSubtask, setCurrSubtask] = useState('')
     const [isSaving, setIsSaving] = useState(false)
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const [repeat, setRepeat] = useState("NONE")
 
     const addSubTask = () => {
         if (currSubtask !== '') {
@@ -40,7 +41,7 @@ const AddTask = () => {
         e.preventDefault()
         if ((title !== '') && (!!deadline) && (subtasks.length !== 0)) {
             setIsSaving(true)
-            userService.newTask(auth.id, title, deadline, subtasks, priority)
+            userService.newTask(auth.id, title, deadline, subtasks, priority, repeat)
             .then(response => {
                 if (response.status === 200){
                     navigate({pathname: "/dashboard"})
@@ -76,8 +77,13 @@ const AddTask = () => {
                                 </div>
                                 <div className='w-full flex items-center justify-center'><input type='datetime-local' onChange={e => setDeadline(new Date(e.target.value))} className='focus:outline-none bg-transparent text-2xl'></input></div>
                             </div>
-                            <div className='flex items-center justify-center w-8/12 mt-3'>
-                                <Star strokeWidth={3.5} size={90} color={priority === true?"rgb(0, 168, 232)":"white"} onClick={() => {setPriority(!priority)}}/>
+                            <div className='w-9/12 rounded-3xl p-6 bg-slate-700 flex justify-center items-center gap-4'>
+                                <button className={`py-2 w-16 flex items-center justify-center rounded-full ${(repeat === "DAILY")?"bg-slate-800":"bg-slate-500"} ${(repeat === "DAILY")?"text-white":"text-black"}`} onClick={() => {(repeat !== "DAILY")?setRepeat("DAILY"):setRepeat("NONE")}}>Daily</button>
+                                <button className={`py-2 w-16 flex items-center justify-center rounded-full ${(repeat === "WEEKLY")?"bg-slate-800":"bg-slate-500"} ${(repeat === "WEEKLY")?"text-white":"text-black"}`} onClick={() => {(repeat !== "WEEKLY")?setRepeat("WEEKLY"):setRepeat("NONE")}}>Weekly</button>
+                                <button className={`py-2 w-16 flex items-center justify-center rounded-full ${(repeat === "MONTHLY")?"bg-slate-800":"bg-slate-500"} ${(repeat === "MONTHLY")?"text-white":"text-black"}`} onClick={() => {(repeat !== "MONTHLY")?setRepeat("MONTHLY"):setRepeat("NONE")}}>Monthly</button>
+                            </div>
+                            <div className='flex items-center justify-center w-8/12'>
+                                <Star strokeWidth={3.5} size={30} color={priority === true?"rgb(0, 168, 232)":"white"} onClick={() => {setPriority(!priority)}}/>
                             </div>
                         </div>
                         <div className='w-7/12 flex bg-slate-700 rounded-3xl pl-4 py-4 gap-4'>

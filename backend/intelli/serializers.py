@@ -21,4 +21,5 @@ class TaskSerializer(serializers.ModelSerializer):
                   'deadline',
                   'progress',
                   'subtasks',
-                  'priority')
+                  'priority',
+                  'repeat')

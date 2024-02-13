@@ -1,10 +1,10 @@
 import axios from "axios"
 
 export const BACKEND_BASE_URL_2 = "https://pranav1483-intellitask.hf.space/api/"
-export const BACKEND_BASE_URL_1 = 'http://localhost:8000/api/'
+export const BACKEND_BASE_URL = 'http://localhost:8000/api/'
 export const BACKEND_BASE_URL_3 = 'https://intelli-task.onrender.com/api/'
 
-export const BACKEND_BASE_URL = 'https://intelli-task-backend.vercel.app/api/'
+export const BACKEND_BASE_URL_1 = 'https://intelli-task-backend.vercel.app/api/'
 class UserService {
     getUser(user) {
         return axios.post(BACKEND_BASE_URL + 'user', user)
@@ -26,8 +26,8 @@ class UserService {
         return axios.delete(BACKEND_BASE_URL + 'task/delete/' + id)
     }
 
-    newTask(id, title, deadline, subtasks, priority) {
-        return axios.post(BACKEND_BASE_URL + 'newtask', {id: id, title: title, deadline: deadline, subtasks: subtasks, priority: priority})
+    newTask(id, title, deadline, subtasks, priority, repeat) {
+        return axios.post(BACKEND_BASE_URL + 'newtask', {id: id, title: title, deadline: deadline, subtasks: subtasks, priority: priority, repeat: repeat})
     }
 }
 
